@@ -18,18 +18,19 @@ public class CustomerController {
     private final static Logger LOGGER = LoggerFactory.getLogger(CustomerController.class);
     private final CustomerService customerService;
     private final CustomerMapper customerMapper;
-@Autowired
+
+    @Autowired
     public CustomerController(CustomerService customerService, CustomerMapper customerMapper) {
         this.customerService = customerService;
         this.customerMapper = customerMapper;
     }
 
-  @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-  @ResponseStatus(HttpStatus.CREATED)
-  public CustomerDTO createCustomerAccount(@RequestBody CustomerDTO customerDTO){
-    LOGGER.info("Request to register a customer account");
-      Customer customer = customerMapper.convertCustomerDTOToCustomer(customerDTO);
-      customerService.createCustomerAccount(customer);
-      return customerDTO;
-  }
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.CREATED)
+    public CustomerDTO createCustomerAccount(@RequestBody CustomerDTO customerDTO) {
+        LOGGER.info("Request to register a customer account");
+        Customer customer = customerMapper.convertCustomerDTOToCustomer(customerDTO);
+        customerService.createCustomerAccount(customer);
+        return customerDTO;
+    }
 }

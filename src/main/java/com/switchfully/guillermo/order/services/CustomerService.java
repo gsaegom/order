@@ -1,21 +1,20 @@
 package com.switchfully.guillermo.order.services;
 
 import com.switchfully.guillermo.order.domain.Customer;
-import com.switchfully.guillermo.order.repository.CustomerDatabase;
+import com.switchfully.guillermo.order.repository.UserDatabase;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 @Component
 public class CustomerService {
 
-    private CustomerDatabase customerDatabase;
+    private UserDatabase userDatabase;
 
-    public CustomerService(CustomerDatabase customerDatabase) {
-        this.customerDatabase = customerDatabase;
+    public CustomerService(UserDatabase userDatabase) {
+        this.userDatabase = userDatabase;
     }
 
-    public Customer createCustomerAccount(Customer customer) {
+    public void createCustomerAccount(Customer customer) {
 
-        return customerDatabase.addCustomerAccount(customer);
+        userDatabase.addCustomerAccount(customer);
     }
 }
