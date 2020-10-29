@@ -5,14 +5,20 @@ import com.switchfully.guillermo.order.domain.ItemGroup;
 import java.util.List;
 
 public class OrderDTO {
-    List<ItemGroup> itemGroups;
+   private List<ItemGroupDTO> itemGroupListDto;
 
+   //public OrderDTO(List<ItemGroupDTO> itemGroupListDto) {
+   //    this.itemGroupListDto = itemGroupListDto;
+   //}
 
-    public OrderDTO(List<ItemGroup> itemGroups) {
-        this.itemGroups = itemGroups;
+    public OrderDTO() {
     }
 
-    public List<ItemGroup> getItemGroups() {
-        return itemGroups;
+    public List<ItemGroupDTO> getItemGroupListDto() {
+        return itemGroupListDto;
+    }
+
+    public void setItemGroupListDto(List<ItemGroupDTO> itemGroupListDto) {
+        this.itemGroupListDto = itemGroupListDto;
     }
 }

@@ -8,15 +8,18 @@ public class Order {
 
     public Order(List<ItemGroup> itemGroups) {
         this.itemGroups = itemGroups;
-        this.totalPrice = getTotalPrice(itemGroups);
+        this.totalPrice = getTotalPrice();
 
     }
 
-    public double getTotalPrice(List<ItemGroup> itemGroups) {
+    public double getTotalPrice() {
         return itemGroups.stream()
                 .mapToDouble(ItemGroup::getGroupPrice)
                 .sum();
 
     }
 
+    public List<ItemGroup> getItemGroupList() {
+        return itemGroups;
+    }
 }

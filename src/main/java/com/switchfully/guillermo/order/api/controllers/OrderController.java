@@ -1,6 +1,7 @@
 package com.switchfully.guillermo.order.api.controllers;
 
 import com.switchfully.guillermo.order.api.dtos.OrderDTO;
+import com.switchfully.guillermo.order.api.dtos.OrderWithPriceDTO;
 import com.switchfully.guillermo.order.api.mappers.OrderMapper;
 import com.switchfully.guillermo.order.domain.Order;
 import com.switchfully.guillermo.order.services.OrderService;
@@ -11,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.UUID;
 
 @RestController
@@ -26,12 +28,20 @@ public class OrderController {
         this.orderMapper = orderMapper;
     }
 
-    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/{customerId}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public OrderDTO makeOrder(@RequestBody OrderDTO orderDTO, @RequestHeader UUID customerId) {
+    public OrderWithPriceDTO makeOrder(@RequestBody OrderDTO orderDto, @PathVariable UUID customerId) {
         LOGGER.info("Request to register an order");
-        Order order = orderMapper.convertOrderDTOToOrder(orderDTO);
-        orderService.makeOrder(customerId,order);
+        Order order = orderMapper.convertOrderDTOToOrder(orderDto);
+        orderService.makeOrder(customerId, order);
+        OrderWithPriceDTO orderWithPriceDTO = orderMapper.convertOrderToOrderWithPriceDto(order);
+        return orderWithPriceDTO;
+    }
+    @PostMapping(path = "/{customerId}/test", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.CREATED)
+    public OrderDTO makeOrderTest(@PathVariable UUID customerId) {
+        LOGGER.info("Request to register an order");
+        OrderDTO orderDTO = new OrderDTO();
         return orderDTO;
     }
 }

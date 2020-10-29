@@ -9,6 +9,14 @@ public class Item {
     private double price;
     private int amount;
 
+    public Item(UUID id, String name, String description, double price, int amount) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.amount = amount;
+    }
+
     public Item(String name, String description, double price, int amount) {
         this.id = UUID.randomUUID();
         this.name = name;

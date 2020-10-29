@@ -1,7 +1,6 @@
 package com.switchfully.guillermo.order.services;
 
 import com.switchfully.guillermo.order.domain.Order;
-import com.switchfully.guillermo.order.domain.users.Customer;
 import com.switchfully.guillermo.order.repository.OrderDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

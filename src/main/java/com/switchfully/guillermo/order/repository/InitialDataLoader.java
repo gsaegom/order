@@ -1,5 +1,6 @@
 package com.switchfully.guillermo.order.repository;
 
+import com.switchfully.guillermo.order.domain.Item;
 import com.switchfully.guillermo.order.domain.users.Admin;
 import com.switchfully.guillermo.order.domain.users.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,8 @@ public class InitialDataLoader {
 
         Admin admin = new Admin(UUID.fromString("96e35a5e-bdbd-492b-aafb-8b9d2c6e96b9"), "JoeTheAdmin", "Doe", "joe@theadmin.com");
         Customer customer = new Customer(UUID.fromString("1f8767ee-e926-4b5a-bcdd-cb6aa3c04c21"), "Smith", "Jane", "jane@smith.com", "50 Nice St", "020394823049");
+        Item item = new Item(UUID.fromString("b3abae44-16b4-4c94-b9a5-70939ba725e9"), "computer", "a computer", 99.99, 50);
+        this.itemDatabase.addItem(item);
         this.userDatabase.addAdmin(admin);
         this.userDatabase.addCustomerAccount(customer);
     }

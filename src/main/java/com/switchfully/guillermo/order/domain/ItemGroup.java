@@ -16,8 +16,10 @@ public class ItemGroup {
     public ItemGroup(UUID itemId, int amount) {
         this.itemId = itemId;
         this.amount = amount;
-        calculateShippingDate(itemId);
-        this.groupPrice = getItemPrice(itemId) * amount;
+        //   calculateShippingDate(itemId);
+        //  this.groupPrice = getItemPrice(itemId) * amount;
+        this.groupPrice = 5;
+        this.shippingDate = LocalDate.now();
     }
 
     private void calculateShippingDate(UUID itemId) {
@@ -31,18 +33,36 @@ public class ItemGroup {
     }
 
     private boolean isInStock(UUID itemId) {
-        return this.amount <= getItem(itemId).getAmount();
+        try {
+            return this.amount <= getItem(itemId).getAmount();
+        } catch (Exception exception) {
+            return false;
+        }
     }
 
-    private Item getItem(UUID itemId) {
+    public Item getItem(UUID itemId) {
         return itemDatabase.getItem(itemId);
+    }
+
+    public UUID getItemId() {
+        return itemId;
+    }
+
+    public int getAmount() {
+        return amount;
     }
 
     private double getItemPrice(UUID itemId) {
         return getItem(itemId).getPrice();
     }
 
+
     public double getGroupPrice() {
         return groupPrice;
     }
+
+    public LocalDate getShippingDate() {
+        return shippingDate;
+    }
 }
+
