@@ -20,4 +20,12 @@ public class Item {
     public UUID getId() {
         return id;
     }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public double getPrice() {
+        return price;
+    }
 }

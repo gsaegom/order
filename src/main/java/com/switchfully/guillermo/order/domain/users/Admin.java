@@ -1,4 +1,6 @@
-package com.switchfully.guillermo.order.domain;
+package com.switchfully.guillermo.order.domain.users;
+
+import com.switchfully.guillermo.order.domain.users.User;
 
 import java.util.UUID;
 

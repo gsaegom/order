@@ -32,6 +32,7 @@ public class ItemController {
         LOGGER.info("Request to add an item");
         Item item = itemMapper.convertItemDTOToItem(itemDTO);
         itemService.addItem(item, id);
+        System.out.println(item.getId());
         return itemDTO;
     }
 }

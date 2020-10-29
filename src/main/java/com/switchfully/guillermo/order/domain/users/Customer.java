@@ -1,4 +1,6 @@
-package com.switchfully.guillermo.order.domain;
+package com.switchfully.guillermo.order.domain.users;
+
+import com.switchfully.guillermo.order.domain.users.User;
 
 import java.util.UUID;
 
@@ -18,4 +20,11 @@ public class Customer extends User {
         this.phoneNumber = phoneNumber;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
 }

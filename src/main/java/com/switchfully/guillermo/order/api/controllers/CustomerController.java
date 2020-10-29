@@ -3,7 +3,7 @@ package com.switchfully.guillermo.order.api.controllers;
 
 import com.switchfully.guillermo.order.api.dtos.CustomerDTO;
 import com.switchfully.guillermo.order.api.mappers.CustomerMapper;
-import com.switchfully.guillermo.order.domain.Customer;
+import com.switchfully.guillermo.order.domain.users.Customer;
 import com.switchfully.guillermo.order.services.CustomerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "/customers")
@@ -32,5 +34,11 @@ public class CustomerController {
         Customer customer = customerMapper.convertCustomerDTOToCustomer(customerDTO);
         customerService.createCustomerAccount(customer);
         return customerDTO;
+    }
+
+    @GetMapping
+    public List<CustomerDTO> getAllMembers(@RequestHeader String id) {
+        List<Customer> allCustomers = customerService.getAllCustomers(id);
+        return customerMapper.convertMemberListToMemberDtoList(allCustomers);
     }
 }

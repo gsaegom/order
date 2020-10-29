@@ -7,6 +7,14 @@ public class CustomerDTO {
     private String address;
     private String phoneNumber;
 
+    public CustomerDTO(String firstName, String lastName, String emailAddress, String address, String phoneNumber) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.emailAddress = emailAddress;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+    }
+
     public String getFirstName() {
         return firstName;
     }

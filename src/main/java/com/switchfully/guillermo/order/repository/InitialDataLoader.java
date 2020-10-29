@@ -1,7 +1,7 @@
 package com.switchfully.guillermo.order.repository;
 
-import com.switchfully.guillermo.order.domain.Admin;
-import com.switchfully.guillermo.order.domain.Customer;
+import com.switchfully.guillermo.order.domain.users.Admin;
+import com.switchfully.guillermo.order.domain.users.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -1,8 +1,7 @@
 package com.switchfully.guillermo.order.services;
 
-import com.switchfully.guillermo.order.api.dtos.ItemDTO;
-import com.switchfully.guillermo.order.domain.Admin;
-import com.switchfully.guillermo.order.domain.Customer;
+import com.switchfully.guillermo.order.domain.users.Admin;
+import com.switchfully.guillermo.order.domain.users.Customer;
 import com.switchfully.guillermo.order.domain.Item;
 import com.switchfully.guillermo.order.exceptions.AdminPrivilegeException;
 import com.switchfully.guillermo.order.repository.ItemDatabase;
@@ -11,8 +10,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.UUID;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class ItemServiceTest {
     @Test

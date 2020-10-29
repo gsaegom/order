@@ -1,17 +1,19 @@
 package com.switchfully.guillermo.order.repository;
 
-import com.switchfully.guillermo.order.domain.Admin;
-import com.switchfully.guillermo.order.domain.Customer;
-import com.switchfully.guillermo.order.domain.User;
+import com.switchfully.guillermo.order.domain.users.Admin;
+import com.switchfully.guillermo.order.domain.users.Customer;
+import com.switchfully.guillermo.order.domain.users.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Repository
 public class UserDatabase {
-    Map<UUID, User> userDatabase;
+    private Map<UUID, User> userDatabase;
 
     public UserDatabase() {
         this.userDatabase = new HashMap<>();
@@ -45,4 +47,10 @@ public class UserDatabase {
     }
 
 
+    public List<Customer> getAllMembers() {
+        return userDatabase.values().stream()
+                .filter(user -> user.getClass().equals(Customer.class))
+                .map(member -> (Customer) member)
+                .collect(Collectors.toList());
+    }
 }

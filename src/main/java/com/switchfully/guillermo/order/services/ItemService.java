@@ -1,7 +1,7 @@
 package com.switchfully.guillermo.order.services;
 
 import com.switchfully.guillermo.order.exceptions.AdminPrivilegeException;
-import com.switchfully.guillermo.order.domain.Admin;
+import com.switchfully.guillermo.order.domain.users.Admin;
 import com.switchfully.guillermo.order.domain.Item;
 import com.switchfully.guillermo.order.repository.ItemDatabase;
 import com.switchfully.guillermo.order.repository.UserDatabase;
