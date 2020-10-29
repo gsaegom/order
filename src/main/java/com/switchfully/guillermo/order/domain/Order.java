@@ -14,7 +14,7 @@ public class Order {
 
     public double getTotalPrice() {
         return itemGroups.stream()
-                .mapToDouble(ItemGroup::getGroupPrice)
+                .mapToDouble(ItemGroup::getItemGroupPrice)
                 .sum();
 
     }

@@ -3,7 +3,9 @@ package com.switchfully.guillermo.order.api.controllers;
 import com.switchfully.guillermo.order.api.dtos.OrderDTO;
 import com.switchfully.guillermo.order.api.dtos.OrderWithPriceDTO;
 import com.switchfully.guillermo.order.api.mappers.OrderMapper;
+import com.switchfully.guillermo.order.domain.ItemGroup;
 import com.switchfully.guillermo.order.domain.Order;
+import com.switchfully.guillermo.order.services.ItemGroupService;
 import com.switchfully.guillermo.order.services.OrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +25,7 @@ public class OrderController {
     private final OrderMapper orderMapper;
 
     @Autowired
-    public OrderController(OrderService orderService, OrderMapper orderMapper) {
+    public OrderController(OrderService orderService, OrderMapper orderMapper, ItemGroupService itemGroupService) {
         this.orderService = orderService;
         this.orderMapper = orderMapper;
     }
@@ -37,6 +39,7 @@ public class OrderController {
         OrderWithPriceDTO orderWithPriceDTO = orderMapper.convertOrderToOrderWithPriceDto(order);
         return orderWithPriceDTO;
     }
+
     @PostMapping(path = "/{customerId}/test", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public OrderDTO makeOrderTest(@PathVariable UUID customerId) {

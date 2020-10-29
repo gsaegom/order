@@ -8,14 +8,14 @@ import java.util.UUID;
 public class ItemGroupWithPriceDTO {
     private UUID itemId;
     private int amount;
-    private double groupPrice;
     private LocalDate shippingDate;
+    private double groupPrice;
 
-    public ItemGroupWithPriceDTO(UUID itemId, int amount, double groupPrice, LocalDate shippingDate) {
+    public ItemGroupWithPriceDTO(UUID itemId, int amount, LocalDate shippingDate,double groupPrice) {
         this.itemId = itemId;
         this.amount = amount;
-        this.groupPrice = groupPrice;
         this.shippingDate = shippingDate;
+        this.groupPrice = groupPrice;
     }
 
     public UUID getItemId() {

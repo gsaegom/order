@@ -1,6 +1,7 @@
 package com.switchfully.guillermo.order.services;
 
 import java.util.UUID;
+
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,5 +13,9 @@ public class ValidationService {
         } catch (Exception ex) {
             return false;
         }
+    }
+
+    public boolean isValidAmount(int amount) {
+        return amount >= 1;
     }
 }

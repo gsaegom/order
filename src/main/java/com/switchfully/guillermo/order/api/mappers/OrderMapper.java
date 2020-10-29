@@ -10,7 +10,11 @@ import java.util.List;
 
 @Component
 public class OrderMapper {
-    private ItemGroupMapper itemGroupMapper= new ItemGroupMapper();
+    private ItemGroupMapper itemGroupMapper;
+
+    public OrderMapper(ItemGroupMapper itemGroupMapper) {
+        this.itemGroupMapper = itemGroupMapper;
+    }
 
     public Order convertOrderDTOToOrder(OrderDTO orderDto) {
         Order order = new Order(itemGroupMapper.convertItemGroupDtoListToItemGroupList(orderDto.getItemGroupListDto()));
