@@ -25,7 +25,7 @@ public class CustomerService {
         userDatabase.addCustomerAccount(customer);
     }
 
-    public List<Customer> getAllCustomers(String checkerId) {
+    public List<Customer> viewAllCustomers(String checkerId) {
 
         if (!validationService.isValidUUID(checkerId)) {
             throw new IllegalArgumentException("Invalid UUID ID.");
@@ -41,6 +41,26 @@ public class CustomerService {
         if (userDatabase.getUserType(adminId) != Admin.class) {
             throw new AdminPrivilegeException("Only an admin can view all customers. In other words, computer says no.");
         }
-        return userDatabase.getAllMembers();
+        return userDatabase.viewAllCustomers();
+    }
+
+    //TODO: Use IDs either as UUID or String
+    //TODO: Maybe create a customer database and an admin database?
+    public Customer viewCustomer(String idToCheck, String checkerId) {
+        if (!validationService.isValidUUID(checkerId)) {
+            throw new IllegalArgumentException("Invalid UUID ID.");
+        }
+
+        UUID adminId = UUID.fromString(checkerId);
+        UUID customerId = UUID.fromString(idToCheck);
+
+        if (!userDatabase.userExists(adminId)) {
+            throw new IllegalArgumentException("This user doesn't exist.");
+        }
+
+        if (userDatabase.getUserType(adminId) != Admin.class) {
+            throw new AdminPrivilegeException("Only an admin can view a customer. In other words, computer says no.");
+        }
+        return userDatabase.viewCustomerById(customerId);
     }
 }

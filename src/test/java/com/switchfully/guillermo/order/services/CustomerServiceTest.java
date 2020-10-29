@@ -38,11 +38,11 @@ class CustomerServiceTest {
         // DO NOT CHECK DIRECTLY AS LIST! The reason is: UserDatabase is stored as a HashMap and when we convert the values to a list it's not always ordered
         // as we would expect. So we'd either need to implement a comparator OR just do .containsAll(your_list)
 
-        Assertions.assertTrue(customerService.getAllCustomers("96e35a5e-bdbd-492b-aafb-8b9d2c6e96b9").containsAll(customerList));
+        Assertions.assertTrue(customerService.viewAllCustomers("96e35a5e-bdbd-492b-aafb-8b9d2c6e96b9").containsAll(customerList));
     }
 
     @Test
-    void givenListOfMembers_whenSomeoneOtherThanAdminChecks_ThrowAdminPrivilegeException() {
+    void givenListOfCustomers_whenSomeoneOtherThanAdminChecks_ThrowAdminPrivilegeException() {
         UserDatabase userDatabase = new UserDatabase();
         ValidationService validationService = new ValidationService();
         CustomerService customerService = new CustomerService(userDatabase, validationService);
@@ -52,10 +52,10 @@ class CustomerServiceTest {
         Customer customer2 = new Customer("Doe2", "John2", "johndoe2@gmail.com", "100 Real St","01934091820398123");
         customerService.createCustomerAccount(customer2);
         customerService.createCustomerAccount(customer);
-        Assertions.assertThrows(AdminPrivilegeException.class, () -> customerService.getAllCustomers("1f8767ee-e926-4b5a-bcdd-cb6aa3c04c21"));
+        Assertions.assertThrows(AdminPrivilegeException.class, () -> customerService.viewAllCustomers("1f8767ee-e926-4b5a-bcdd-cb6aa3c04c21"));
     }
     @Test
-    void givenListOfMembers_whenCheckersIdDoesntExist_ThrowIllegalArgumentException() {
+    void givenListOfCustomers_whenCheckersIdDoesntExist_ThrowIllegalArgumentException() {
         UserDatabase userDatabase = new UserDatabase();
         ValidationService validationService = new ValidationService();
         CustomerService customerService = new CustomerService(userDatabase, validationService);
@@ -63,6 +63,44 @@ class CustomerServiceTest {
         Customer customer2 = new Customer("Doe2", "John2", "johndoe2@gmail.com", "100 Real St","01934091820398123");
         customerService.createCustomerAccount(customer2);
         customerService.createCustomerAccount(customer);
-        Assertions.assertThrows(IllegalArgumentException.class, () -> customerService.getAllCustomers("1f8767ee-e926-4b5a-bcdd-cb6aa3c0"));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> customerService.viewAllCustomers("1f8767ee-e926-4b5a-bcdd-cb6aa3c0"));
+    }
+
+    @Test
+    void givenListOfCustomers_AnAdminCanViewACustomerByEnteringTheirId() {
+        UserDatabase userDatabase = new UserDatabase();
+        ValidationService validationService = new ValidationService();
+        CustomerService customerService = new CustomerService(userDatabase, validationService);
+        Admin admin = new Admin(UUID.fromString("96e35a5e-bdbd-492b-aafb-8b9d2c6e96b9"), "admin", "admin", "admin@admin.com");
+        userDatabase.addAdmin(admin);
+        Customer customer = new Customer(UUID.fromString("1f8767ee-e926-4b5a-bcdd-cb6aa3c04c21"), "Smith", "Jane", "jane@smith.com", "50 Nice St", "020394823049");
+        Customer customer2 = new Customer("Doe2", "John2", "johndoe2@gmail.com", "100 Real St","01934091820398123");
+        customerService.createCustomerAccount(customer2);
+        customerService.createCustomerAccount(customer);
+        Assertions.assertEquals(customerService.viewCustomer("1f8767ee-e926-4b5a-bcdd-cb6aa3c04c21","96e35a5e-bdbd-492b-aafb-8b9d2c6e96b9"),customer);
+    }
+    @Test
+    void givenListOfCustomers_WhenNonAdminTriesToViewACustomerByEnteringTheirId_ThrowsAdminPrivilegeException() {
+        UserDatabase userDatabase = new UserDatabase();
+        ValidationService validationService = new ValidationService();
+        CustomerService customerService = new CustomerService(userDatabase, validationService);
+        Customer customer = new Customer(UUID.fromString("1f8767ee-e926-4b5a-bcdd-cb6aa3c04c21"), "Smith", "Jane", "jane@smith.com", "50 Nice St", "020394823049");
+        Customer customer2 = new Customer("Doe2", "John2", "johndoe2@gmail.com", "100 Real St","01934091820398123");
+        customerService.createCustomerAccount(customer2);
+        customerService.createCustomerAccount(customer);
+        Assertions.assertThrows(AdminPrivilegeException.class,()->customerService.viewCustomer("1f8767ee-e926-4b5a-bcdd-cb6aa3c04c21","1f8767ee-e926-4b5a-bcdd-cb6aa3c04c21"));
+    }
+    @Test
+    void givenListOfCustomers_WhenAnAdminEntersANonCustomerId_ThenThrowsIllegalArgumentException() {
+        UserDatabase userDatabase = new UserDatabase();
+        ValidationService validationService = new ValidationService();
+        CustomerService customerService = new CustomerService(userDatabase, validationService);
+        Admin admin = new Admin(UUID.fromString("96e35a5e-bdbd-492b-aafb-8b9d2c6e96b9"), "admin", "admin", "admin@admin.com");
+        userDatabase.addAdmin(admin);
+        Customer customer = new Customer(UUID.fromString("1f8767ee-e926-4b5a-bcdd-cb6aa3c04c21"), "Smith", "Jane", "jane@smith.com", "50 Nice St", "020394823049");
+        Customer customer2 = new Customer("Doe2", "John2", "johndoe2@gmail.com", "100 Real St","01934091820398123");
+        customerService.createCustomerAccount(customer2);
+        customerService.createCustomerAccount(customer);
+        Assertions.assertThrows(IllegalArgumentException.class,()->customerService.viewCustomer("96e35a5e-bdbd-492b-aafb-8b9d2c6e96b9","96e35a5e-bdbd-492b-aafb-8b9d2c6e96b9"));
     }
 }

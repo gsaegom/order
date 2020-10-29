@@ -17,9 +17,14 @@ public class CustomerMapper {
         return customer;
     }
 
-    public List<CustomerDTO> convertMemberListToMemberDtoList(List<Customer> customerList) {
+    public List<CustomerDTO> convertCustomerListToCustomerDtoList(List<Customer> customerList) {
         return customerList.stream()
                 .map(customer -> new CustomerDTO(customer.getFirstName(), customer.getLastName(), customer.getEmail(), customer.getAddress(), customer.getPhoneNumber()))
                 .collect(Collectors.toList());
+    }
+
+    public CustomerDTO convertCustomerToCustomerDTO(Customer customer) {
+        CustomerDTO customerDTO = new CustomerDTO(customer.getFirstName(), customer.getLastName(), customer.getEmail(), customer.getAddress(), customer.getPhoneNumber());
+        return customerDTO;
     }
 }

@@ -47,10 +47,16 @@ public class UserDatabase {
     }
 
 
-    public List<Customer> getAllMembers() {
+    public List<Customer> viewAllCustomers() {
         return userDatabase.values().stream()
                 .filter(user -> user.getClass().equals(Customer.class))
-                .map(member -> (Customer) member)
+                .map(customer -> (Customer) customer)
                 .collect(Collectors.toList());
+    }
+
+    public Customer viewCustomerById(UUID id) {
+        if (getUserType(id).equals(Customer.class)) {
+            return (Customer) userDatabase.get(id);
+        } else throw new IllegalArgumentException("This user is not a customer");
     }
 }

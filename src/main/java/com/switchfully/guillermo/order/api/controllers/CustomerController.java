@@ -37,8 +37,15 @@ public class CustomerController {
     }
 
     @GetMapping
-    public List<CustomerDTO> getAllMembers(@RequestHeader String id) {
-        List<Customer> allCustomers = customerService.getAllCustomers(id);
-        return customerMapper.convertMemberListToMemberDtoList(allCustomers);
+    public List<CustomerDTO> viewAllCustomers(@RequestHeader String id) {
+        List<Customer> allCustomers = customerService.viewAllCustomers(id);
+        return customerMapper.convertCustomerListToCustomerDtoList(allCustomers);
+    }
+
+    @GetMapping(path = "/id/{customerId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public CustomerDTO viewCustomer(@PathVariable String customerId, @RequestHeader String checkerId){
+        Customer customer = customerService.viewCustomer(customerId,checkerId);
+        return customerMapper.convertCustomerToCustomerDTO(customer);
     }
 }
+
