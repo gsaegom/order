@@ -22,16 +22,6 @@ public class ItemGroupService {
         this.validationService = validationService;
     }
 
-    public void createItemGroup(UUID itemId, int amount) {
-        if (!validationService.isValidUUID(itemId.toString())) {
-            throw new IllegalArgumentException("Invalid ID.");
-        }
-        if (!validationService.isValidAmount(amount)) {
-            throw new IllegalArgumentException("Amount must be 1 or higher.");
-        }
-
-        itemGroupDatabase.addItemGroup(itemId, amount);
-    }
 
     public LocalDate calculateShippingDate(UUID itemId, int amount) {
         LocalDate tomorrow = LocalDate.now().plus(1, ChronoUnit.DAYS);
@@ -62,4 +52,6 @@ public class ItemGroupService {
     private double getItemPrice(UUID itemId) {
         return getItem(itemId).getPrice();
     }
+
+
 }

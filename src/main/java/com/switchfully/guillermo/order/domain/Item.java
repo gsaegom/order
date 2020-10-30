@@ -8,13 +8,16 @@ public class Item {
     private String description;
     private double price;
     private int amount;
+    private Stock stockLevel;
 
-    public Item(UUID id, String name, String description, double price, int amount) {
+    //TODO:Do something with negative amounts and prices
+    public Item(UUID id, String name, String description, double price, int amount, Stock stockLevel) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
         this.amount = amount;
+        this.stockLevel = stockLevel;
     }
 
     public Item(String name, String description, double price, int amount) {
@@ -23,6 +26,15 @@ public class Item {
         this.description = description;
         this.price = price;
         this.amount = amount;
+        this.stockLevel = Stock.HIGH;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public UUID getId() {
@@ -35,5 +47,13 @@ public class Item {
 
     public double getPrice() {
         return price;
+    }
+
+    public Stock getStockLevel() {
+        return stockLevel;
+    }
+
+    public void setStockLevel(Stock stockLevel) {
+        this.stockLevel = stockLevel;
     }
 }

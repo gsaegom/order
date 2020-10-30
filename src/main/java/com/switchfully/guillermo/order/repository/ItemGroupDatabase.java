@@ -22,10 +22,10 @@ public class ItemGroupDatabase {
         this.itemDatabase = itemDatabase;
     }
 
-    public void addItemGroup(UUID itemId, int amount) {
-        ItemGroup itemGroup = new ItemGroup(itemId, amount, calculateShippingDate(itemId, amount), getItemGroupPrice(itemId, amount));
-
-    }
+   // public void addItemGroup(UUID itemId, int amount) {
+   //     ItemGroup itemGroup = new ItemGroup(itemId, amount, calculateShippingDate(itemId, amount), getItemGroupPrice(itemId, amount));
+   //
+   // }
 
     private LocalDate calculateShippingDate(UUID itemId, int amount) {
         LocalDate tomorrow = LocalDate.now().plus(1, ChronoUnit.DAYS);

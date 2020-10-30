@@ -39,12 +39,4 @@ public class OrderController {
         OrderWithPriceDTO orderWithPriceDTO = orderMapper.convertOrderToOrderWithPriceDto(order);
         return orderWithPriceDTO;
     }
-
-    @PostMapping(path = "/{customerId}/test", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.CREATED)
-    public OrderDTO makeOrderTest(@PathVariable UUID customerId) {
-        LOGGER.info("Request to register an order");
-        OrderDTO orderDTO = new OrderDTO();
-        return orderDTO;
-    }
 }

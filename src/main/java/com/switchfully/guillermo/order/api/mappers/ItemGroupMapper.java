@@ -11,11 +11,6 @@ import java.util.stream.Collectors;
 
 @Component
 public class ItemGroupMapper {
-    private ItemGroupService itemGroupService;
-
-    public ItemGroupMapper(ItemGroupService itemGroupService) {
-        this.itemGroupService = itemGroupService;
-    }
 
     //public ItemGroup convertItemGroupWithPriceDtoToItemGroup(ItemGroupWithPriceDTO itemGroupWithPriceDTO) {
     //    ItemGroup itemgroup = new ItemGroup(itemGroupWithPriceDTO.getItemId(), itemGroupWithPriceDTO.getAmount(),);
@@ -23,7 +18,7 @@ public class ItemGroupMapper {
     //}
 
     public ItemGroup convertItemGroupDtoToItemGroup(ItemGroupDTO itemGroupDto) {
-        ItemGroup itemGroup = new ItemGroup(itemGroupDto.getItemId(), itemGroupDto.getAmount(), itemGroupService.calculateShippingDate(itemGroupDto.getItemId(), itemGroupDto.getAmount()), itemGroupService.getItemGroupPrice(itemGroupDto.getItemId(), itemGroupDto.getAmount()));
+        ItemGroup itemGroup = new ItemGroup(itemGroupDto.getItemId(), itemGroupDto.getAmount());
         return itemGroup;
     }
 
