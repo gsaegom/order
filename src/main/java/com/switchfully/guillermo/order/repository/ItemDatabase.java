@@ -31,4 +31,5 @@ public class ItemDatabase {
                 .filter(item -> item.getStockLevel().equals(stockLevel))
                 .collect(Collectors.toList());
     }
+
 }
